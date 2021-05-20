@@ -56,6 +56,12 @@ button:active {
 }
 
 .bg-color-textbox {
+  font-size: 1.5rem;
+  font-family: 'Montserrat', sans-serif;
+  border: none;
+  background: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  color: white;
   display: none;
 }
 

@@ -62,4 +62,8 @@ github.addEventListener('click', () => {
   window.open('https://github.com/patel-priyank/Pastel-Color-Generator');
 });
 
+bgColorTextbox.addEventListener('keydown', (event) => {
+  event.preventDefault();
+});
+
 setBackground();
