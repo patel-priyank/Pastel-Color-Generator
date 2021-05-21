@@ -20,7 +20,7 @@ button {
   cursor: pointer;
   font-size: 1.25rem;
   min-height: 2.5rem;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: none;
   border-radius: 10px;
   color: #fff;
   background-color: rgba(0, 0, 0, 0.15);
@@ -32,7 +32,13 @@ button {
   width: 150px;
 }
 
-button:hover {
+button:disabled {
+  cursor: not-allowed;
+  background-color: rgb(31, 31, 31, 0.05);
+  box-shadow: 0 0.25rem rgba(121, 121, 121, 0.2);
+}
+
+button:not(:disabled):hover {
   filter: brightness(125%);
 }
 
