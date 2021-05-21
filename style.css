@@ -63,7 +63,10 @@ button:active {
   background: rgba(255, 255, 255, 0.5);
   text-align: center;
   color: white;
-  display: none;
+  position: fixed;
+  top: 1rem;
+  cursor: default;
+  opacity: 0;
 }
 
 .github {
