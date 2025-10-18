@@ -7,33 +7,31 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css"
-      integrity="sha512-xnP2tOaCJnzp2d2IqKFcxuOiVCbuessxM6wuiolT9eeEJCyy0Vhcwa4zQvdrZNVqlqaxXhHqsSV1Ww7T2jSCUQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" type="text/css" href="./style.css" />
   </head>
 
-  <body id="body">
-    <h1 class="header">Pastel</h1>
+  <body>
+    <h1>Pastel</h1>
 
-    <div class="btn-group">
-      <button id="btn-random">Random</button>
-      <button id="btn-copy">Copy</button>
+    <div class="buttons">
+      <button id="random" title="New">
+        <i class="bi bi-shuffle"></i>
+      </button>
+      <button id="copy" title="Copy">
+        <i class="bi bi-clipboard"></i>
+      </button>
+      <button id="undo" title="Undo">
+        <i class="bi bi-arrow-counterclockwise"></i>
+      </button>
     </div>
 
-    <span class="bg-color" id="bg-color"></span>
+    <span id="hex" class="hex"></span>
 
-    <div class="btn-group">
-      <button id="btn-undo" disabled>Undo</button>
-    </div>
-
-    <input type="text" class="bg-color-textbox" id="bg-color-textbox" />
-
-    <span class="github" id="github" title="Browse code">
+    <a href="https://github.com/patel-priyank/Pastel-Color-Generator" target="_blank">
       <i class="bi bi-github"></i>
-    </span>
+    </a>
 
-    <script type="text/javascript" src="./script.js"></script>
+    <script src="./script.js"></script>
   </body>
 </html>

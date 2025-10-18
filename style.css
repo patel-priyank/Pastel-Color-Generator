@@ -1,91 +1,78 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
-html {
+:root {
+  --color: #ffffff;
+}
+
+* {
   box-sizing: border-box;
 }
 
 body {
   font-family: 'Montserrat', sans-serif;
   margin: 0;
-  min-height: 100vh;
+  min-height: 100dvh;
   color: #333;
-  text-align: center;
+  background: var(--color);
   display: flex;
   flex-direction: column;
-  align-items: center; /* center vertically */
-  justify-content: center; /* center horizontally */
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+h1 {
+  text-transform: uppercase;
+  letter-spacing: 0.5ch;
+  margin: 0;
+  margin-right: -0.5ch;
+}
+
+.buttons {
+  display: flex;
+  gap: 0.75rem;
 }
 
 button {
   cursor: pointer;
   font-size: 1.25rem;
-  min-height: 2.5rem;
-  border: none;
-  border-radius: 10px;
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.15);
-  outline: none;
-  padding: 0.5rem 1.75rem;
-  box-shadow: 0 0.25rem rgba(121, 121, 121, 0.65);
-  transition: 0.15s;
-  margin: 0.5em 0.25em auto 0.25em;
-  width: 150px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: #333;
+  background: var(--color);
+  filter: brightness(0.85);
+  padding: 0.5rem 1.25rem;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.25;
+  }
+
+  &:not(:disabled):active {
+    transform: translateY(2px);
+  }
+
+  &:focus-visible {
+    outline: none;
+    border: 1px solid #333;
+  }
 }
 
-button:disabled {
-  cursor: not-allowed;
-  background-color: rgb(31, 31, 31, 0.05);
-  box-shadow: 0 0.25rem rgba(121, 121, 121, 0.2);
-}
-
-button:not(:disabled):hover {
-  filter: brightness(125%);
-}
-
-button:active {
-  transform: translate(0, 0.3rem);
-  box-shadow: 0 0.1rem rgba(255, 255, 255, 0.65);
-}
-
-.header {
-  font-size: 5rem;
-  text-transform: uppercase;
-  margin: 1rem;
-}
-
-.btn-group {
-  margin: 1rem;
-}
-
-.bg-color {
-  font-size: 1.75rem;
-  margin: 1rem;
-}
-
-.bg-color-textbox {
+.hex {
   font-size: 1.5rem;
-  font-family: 'Montserrat', sans-serif;
-  border: none;
-  background: rgba(255, 255, 255, 0.5);
-  text-align: center;
-  color: white;
-  position: fixed;
-  top: 1rem;
-  cursor: default;
-  opacity: 0;
 }
 
-.github {
+a {
   font-size: 1.5rem;
+  color: #333;
   position: fixed;
   bottom: 1rem;
   right: 1rem;
-  cursor: pointer;
-}
+  text-decoration: none;
+  border-radius: 4px;
 
-/* Media Query: Tablet or smaller */
-@media screen and (max-width: 1000px) {
-  .header {
-    font-size: 3.5rem;
+  &:focus-visible {
+    outline: 1px solid #333;
+    outline-offset: 2px;
   }
 }

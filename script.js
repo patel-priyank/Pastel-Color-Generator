@@ -1,86 +1,58 @@
-const body = document.querySelector('#body');
-const btnRandom = document.querySelector('#btn-random');
-const btnCopy = document.querySelector('#btn-copy');
-const btnUndo = document.querySelector('#btn-undo');
-const bgColor = document.querySelector('#bg-color');
-const bgColorTextbox = document.querySelector('#bg-color-textbox');
-const github = document.querySelector('#github');
+const root = document.documentElement;
+const random = document.querySelector('#random');
+const copy = document.querySelector('#copy');
+const undo = document.querySelector('#undo');
+const hex = document.querySelector('#hex');
 
-var previousColor = '';
+const colors = [];
 
-const getRandomColorInRgb = () => {
-  const hex = 'BCDEF';
+let timeout = 0;
+
+const getRandomColor = (chars = 'bcdef') => {
   let color = '#';
 
   for (let i = 0; i < 6; i++) {
-    color += hex[Math.floor(Math.random() * hex.length)];
+    color += chars[Math.floor(Math.random() * chars.length)];
   }
 
   return color;
 };
 
-const rgbToHex = (rgbColor) => {
-  var colorValues = rgbColor
-    .substring(4)
-    .substring(0, rgbColor.substring(4).length - 1)
-    .split(',');
+const setBg = () => {
+  const newBg = getRandomColor();
 
-  var hexColor =
-    '#' +
-    Number(colorValues[0]).toString(16).toUpperCase() +
-    Number(colorValues[1]).toString(16).toUpperCase() +
-    Number(colorValues[2]).toString(16).toUpperCase();
+  root.style.setProperty('--color', newBg);
+  hex.textContent = newBg;
 
-  return hexColor;
+  colors.push(newBg);
+  undo.disabled = colors.length < 2;
 };
 
-const setBackground = () => {
-  previousColor = body.style.background;
-  btnUndo.disabled = false;
+const copyBg = () => {
+  const bg = getComputedStyle(root).getPropertyValue('--color');
 
-  body.style.background = getRandomColorInRgb();
-  bgColor.textContent = rgbToHex(body.style.background);
+  navigator.clipboard.writeText(bg);
+  copy.querySelector('i').classList.replace('bi-clipboard', 'bi-clipboard-check');
+
+  clearTimeout(timeout);
+
+  timeout = setTimeout(() => {
+    copy.querySelector('i').classList.replace('bi-clipboard-check', 'bi-clipboard');
+  }, 1500);
 };
 
-const copyBackground = () => {
-  bgColorTextbox.value = rgbToHex(body.style.background);
-  bgColorTextbox.select();
-  document.execCommand('copy');
-  bgColorTextbox.value = '';
-  bgColorTextbox.blur();
+const undoBg = () => {
+  colors.pop();
+  const newBg = colors[colors.length - 1];
 
-  btnCopy.innerHTML = 'Copied!';
+  root.style.setProperty('--color', newBg);
+  hex.textContent = newBg;
 
-  btnCopy.style.background = 'springgreen';
-  btnCopy.style.color = 'black';
-
-  setTimeout(() => {
-    btnCopy.innerHTML = 'Copy';
-    btnCopy.style.background = '';
-    btnCopy.style.color = '';
-  }, 1000);
+  undo.disabled = colors.length < 2;
 };
 
-const browseCode = () => {
-  window.open('https://github.com/patel-priyank/Pastel-Color-Generator');
-};
+random.addEventListener('click', setBg);
+copy.addEventListener('click', copyBg);
+undo.addEventListener('click', undoBg);
 
-const setPreviousBackground = () => {
-  body.style.background = previousColor;
-  bgColor.textContent = rgbToHex(body.style.background);
-
-  previousColor = '';
-  btnUndo.disabled = true;
-};
-
-btnRandom.addEventListener('click', setBackground);
-btnCopy.addEventListener('click', copyBackground);
-btnUndo.addEventListener('click', setPreviousBackground);
-github.addEventListener('click', browseCode);
-
-bgColorTextbox.addEventListener('keydown', (event) => {
-  event.preventDefault();
-});
-
-body.style.background = getRandomColorInRgb();
-bgColor.textContent = rgbToHex(body.style.background);
+setBg();
