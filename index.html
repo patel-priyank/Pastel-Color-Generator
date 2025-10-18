@@ -12,21 +12,35 @@
   </head>
 
   <body>
-    <h1>Pastel</h1>
+    <main>
+      <h1>Pastel</h1>
 
-    <div class="buttons">
-      <button id="random" title="New">
-        <i class="bi bi-shuffle"></i>
-      </button>
-      <button id="copy" title="Copy">
-        <i class="bi bi-clipboard"></i>
-      </button>
-      <button id="undo" title="Undo">
-        <i class="bi bi-arrow-counterclockwise"></i>
-      </button>
-    </div>
+      <div class="buttons">
+        <button id="random" title="New">
+          <i class="bi bi-shuffle"></i>
+        </button>
 
-    <span id="hex" class="hex"></span>
+        <button id="undo" title="Undo">
+          <i class="bi bi-arrow-counterclockwise"></i>
+        </button>
+      </div>
+
+      <div class="color">
+        <span id="hex" class="hex"></span>
+
+        <button id="copy-hex" title="Copy HEX">
+          <i class="bi bi-clipboard"></i>
+        </button>
+      </div>
+
+      <div class="color">
+        <span id="rgb" class="rgb"></span>
+
+        <button id="copy-rgb" title="Copy RGB">
+          <i class="bi bi-clipboard"></i>
+        </button>
+      </div>
+    </main>
 
     <a href="https://github.com/patel-priyank/Pastel-Color-Generator" target="_blank">
       <i class="bi bi-github"></i>
