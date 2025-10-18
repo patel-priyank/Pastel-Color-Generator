@@ -1,17 +1,17 @@
 const root = document.documentElement;
-const random = document.querySelector('#random');
-const undo = document.querySelector('#undo');
+const btnNew = document.querySelector('#new');
+const btnUndo = document.querySelector('#undo');
+const btnRedo = document.querySelector('#redo');
 const hex = document.querySelector('#hex');
-const copyHex = document.querySelector('#copy-hex');
 const rgb = document.querySelector('#rgb');
-const copyRgb = document.querySelector('#copy-rgb');
+
+const animationClass = 'animate__pulse';
 
 const colors = [];
+const undoneColors = [];
 
-let timeoutHex = 0;
-let timeoutRgb = 0;
-
-const getRandomColor = (chars = 'bcdef') => {
+const getRandomColor = () => {
+  const chars = 'bcdef';
   let color = '#';
 
   for (let i = 0; i < 6; i++) {
@@ -39,49 +39,55 @@ const setBg = () => {
   rgb.textContent = hexToRgb(newBg);
 
   colors.push(newBg);
-  undo.disabled = colors.length < 2;
+  btnUndo.disabled = colors.length === 1;
+
+  undoneColors.length = 0;
+  btnRedo.disabled = true;
 };
 
 const undoBg = () => {
-  colors.pop();
+  undoneColors.push(colors.pop());
   const newBg = colors[colors.length - 1];
 
   root.style.setProperty('--color', newBg);
   hex.textContent = newBg;
   rgb.textContent = hexToRgb(newBg);
 
-  undo.disabled = colors.length < 2;
+  btnUndo.disabled = colors.length === 1;
+  btnRedo.disabled = false;
+};
+
+const redoBg = () => {
+  colors.push(undoneColors.pop());
+  const newBg = colors[colors.length - 1];
+
+  root.style.setProperty('--color', newBg);
+  hex.textContent = newBg;
+  rgb.textContent = hexToRgb(newBg);
+
+  btnUndo.disabled = false;
+  btnRedo.disabled = undoneColors.length === 0;
 };
 
 const copyBgHex = () => {
   const bg = getComputedStyle(root).getPropertyValue('--color');
-
   navigator.clipboard.writeText(bg);
-  copyHex.querySelector('i').classList.replace('bi-clipboard', 'bi-clipboard-check');
-
-  clearTimeout(timeoutHex);
-
-  timeoutHex = setTimeout(() => {
-    copyHex.querySelector('i').classList.replace('bi-clipboard-check', 'bi-clipboard');
-  }, 1500);
+  hex.classList.add(animationClass);
 };
 
 const copyBgRgb = () => {
   const bg = hexToRgb(getComputedStyle(root).getPropertyValue('--color'));
-
   navigator.clipboard.writeText(bg);
-  copyRgb.querySelector('i').classList.replace('bi-clipboard', 'bi-clipboard-check');
-
-  clearTimeout(timeoutRgb);
-
-  timeoutRgb = setTimeout(() => {
-    copyRgb.querySelector('i').classList.replace('bi-clipboard-check', 'bi-clipboard');
-  }, 1500);
+  rgb.classList.add(animationClass);
 };
 
-random.addEventListener('click', setBg);
-undo.addEventListener('click', undoBg);
-copyHex.addEventListener('click', copyBgHex);
-copyRgb.addEventListener('click', copyBgRgb);
+btnNew.addEventListener('click', setBg);
+btnUndo.addEventListener('click', undoBg);
+btnRedo.addEventListener('click', redoBg);
+hex.addEventListener('click', copyBgHex);
+rgb.addEventListener('click', copyBgRgb);
+
+hex.addEventListener('animationend', () => hex.classList.remove(animationClass));
+rgb.addEventListener('animationend', () => rgb.classList.remove(animationClass));
 
 setBg();
