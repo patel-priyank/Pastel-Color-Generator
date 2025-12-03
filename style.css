@@ -1,10 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap');
+
 :root {
   --color: #ffffff;
 }
 
+* {
+  font-family: 'Google Sans Code', monospace;
+  outline: none;
+}
+
+button {
+  display: flex;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
-    'Helvetica Neue', sans-serif;
   margin: 0;
   min-height: 100dvh;
   color: #444;
@@ -12,98 +23,71 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
 
-  main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
 
-    h1 {
-      text-transform: uppercase;
-      letter-spacing: 0.5ch;
-      margin: 0;
-      margin-right: -0.5ch;
-    }
+h1 {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5ch;
+  margin-right: -0.5ch;
+}
 
-    .btn-container {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
+.btn-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 
-      button {
-        cursor: pointer;
-        font-size: 1.25rem;
-        border: 1px solid transparent;
-        border-radius: 8px;
-        color: #444;
-        background: var(--color);
-        filter: brightness(0.85);
-        padding: 0.5rem 1.25rem;
-        box-shadow: 0 2px #444;
-
-        &:disabled {
-          cursor: not-allowed;
-          opacity: 0.25;
-        }
-
-        &:not(:disabled):active {
-          transform: translateY(2px);
-          box-shadow: none;
-        }
-
-        &:focus-visible {
-          outline: none;
-          border: 1px solid #444;
-        }
-      }
-    }
-
-    .info {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 1.5rem;
-
-      i {
-        display: flex;
-
-        &::before {
-          font-size: 1.15rem;
-          margin-top: 3px;
-        }
-      }
-    }
-
-    .color {
-      cursor: pointer;
-      font-size: 1.5rem;
-      font-weight: bold;
-      border: none;
-      border-radius: 4px;
-      color: #444;
-      background: transparent;
-      padding: 0;
-
-      &:focus-visible {
-        outline: 1px solid #444;
-        outline-offset: 4px;
-      }
-    }
-  }
-
-  a {
-    font-size: 1.5rem;
+  button {
+    font-size: 1.25rem;
+    background: var(--color);
     color: #444;
-    position: fixed;
-    bottom: 1rem;
-    right: 1rem;
-    text-decoration: none;
-    border-radius: 4px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 0.5rem 1.25rem;
+    filter: brightness(0.85);
+    box-shadow: 0 2px #444;
+
+    &.btn-new {
+      font-size: 1.5rem;
+      padding: 1rem 2.5rem;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.25;
+    }
+
+    &:not(:disabled):active {
+      transform: translateY(2px);
+      box-shadow: none;
+    }
 
     &:focus-visible {
-      outline: 1px solid #444;
-      outline-offset: 4px;
+      border-color: #444;
     }
+  }
+}
+
+.color {
+  font-size: 1.25rem;
+  background: transparent;
+  color: #444;
+  border: 1px dashed #444;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+
+  &:focus-visible {
+    border-style: solid;
+  }
+
+  &:active {
+    font-weight: bold;
   }
 }

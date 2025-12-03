@@ -5,8 +5,6 @@ const btnRedo = document.querySelector('#redo');
 const hex = document.querySelector('#hex');
 const rgb = document.querySelector('#rgb');
 
-const animationClass = 'animate__pulse';
-
 const colors = [];
 const undoneColors = [];
 
@@ -28,24 +26,24 @@ const hexToRgb = () => {
   const g = parseInt(bg.slice(3, 5), 16);
   const b = parseInt(bg.slice(5, 7), 16);
 
-  return `rgb(${r}, ${g}, ${b})`;
+  return `rgb(${r} ${g} ${b})`;
 };
 
-const setBg = () => {
-  const newBg = getRandomColor();
+const setBackground = () => {
+  const newBackground = getRandomColor();
 
-  root.style.setProperty('--color', newBg);
-  hex.textContent = newBg;
-  rgb.textContent = hexToRgb(newBg);
+  root.style.setProperty('--color', newBackground);
+  hex.textContent = newBackground;
+  rgb.textContent = hexToRgb(newBackground);
 
-  colors.push(newBg);
+  colors.push(newBackground);
   btnUndo.disabled = colors.length === 1;
 
   undoneColors.length = 0;
   btnRedo.disabled = true;
 };
 
-const undoBg = () => {
+const undo = () => {
   undoneColors.push(colors.pop());
   const newBg = colors[colors.length - 1];
 
@@ -57,7 +55,7 @@ const undoBg = () => {
   btnRedo.disabled = false;
 };
 
-const redoBg = () => {
+const redo = () => {
   colors.push(undoneColors.pop());
   const newBg = colors[colors.length - 1];
 
@@ -72,22 +70,17 @@ const redoBg = () => {
 const copyBgHex = () => {
   const bg = getComputedStyle(root).getPropertyValue('--color');
   navigator.clipboard.writeText(bg);
-  hex.classList.add(animationClass);
 };
 
 const copyBgRgb = () => {
   const bg = hexToRgb(getComputedStyle(root).getPropertyValue('--color'));
   navigator.clipboard.writeText(bg);
-  rgb.classList.add(animationClass);
 };
 
-btnNew.addEventListener('click', setBg);
-btnUndo.addEventListener('click', undoBg);
-btnRedo.addEventListener('click', redoBg);
+btnNew.addEventListener('click', setBackground);
+btnUndo.addEventListener('click', undo);
+btnRedo.addEventListener('click', redo);
 hex.addEventListener('click', copyBgHex);
 rgb.addEventListener('click', copyBgRgb);
 
-hex.addEventListener('animationend', () => hex.classList.remove(animationClass));
-rgb.addEventListener('animationend', () => rgb.classList.remove(animationClass));
-
-setBg();
+setBackground();

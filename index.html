@@ -6,9 +6,8 @@
     <title>Pastel Color Generator</title>
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="./style.css" />
   </head>
 
@@ -17,23 +16,18 @@
       <h1>Pastel</h1>
 
       <div class="btn-container">
-        <button id="new" title="New"><i class="bi bi-shuffle"></i></button>
-        <button id="undo" title="Undo"><i class="bi bi-arrow-counterclockwise"></i></button>
-        <button id="redo" title="Redo"><i class="bi bi-arrow-clockwise"></i></button>
+        <button id="undo" title="Undo"><span class="material-symbols-outlined"> undo </span></button>
+
+        <button id="new" class="btn-new" title="New">
+          <span class="material-symbols-outlined"> wand_stars </span>
+        </button>
+
+        <button id="redo" title="Redo"><span class="material-symbols-outlined"> redo </span></button>
       </div>
 
-      <div class="info">
-        <i class="bi bi-clipboard"></i>
-        <span>Click color code to copy</span>
-      </div>
-
-      <button id="hex" class="color hex animate__animated"></button>
-      <button id="rgb" class="color rgb animate__animated"></button>
+      <button id="hex" class="color hex"></button>
+      <button id="rgb" class="color rgb"></button>
     </main>
-
-    <a href="https://github.com/patel-priyank/Pastel-Color-Generator" target="_blank">
-      <i class="bi bi-github"></i>
-    </a>
 
     <script src="./script.js"></script>
   </body>
